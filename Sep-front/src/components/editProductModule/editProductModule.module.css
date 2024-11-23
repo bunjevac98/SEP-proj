@@ -1,0 +1,77 @@
+.productModule {
+  width: 100%;
+}
+
+.LabelInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 80vw;
+  width: 300px;
+  margin-bottom: 24px;
+}
+
+.LabelInput > label {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.LabelInput > input,
+.LabelInput > textarea {
+  width: 100%;
+}
+
+.LabelInput > label > span,
+.descriptionSpan {
+  font-size: 14px;
+  color: #3b3b3b;
+}
+
+.submitButton {
+  background-color: var(--mainGreenColor);
+  color: #fff;
+  padding: 8px 12px;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.sizesInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sizesInputContainer > .submitButton {
+  width: fit-content;
+}
+
+.sizesContainer input {
+  box-sizing: border-box;
+}
+
+.sizesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border: 1px solid var(--mainGreenColor);
+  padding: 12px;
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .sizesContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .sizesContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.sizesContainer .sizeInputInstance {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

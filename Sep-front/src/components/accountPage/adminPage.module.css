@@ -1,0 +1,111 @@
+.productsContainer,
+.categoriesContainer {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    max-height: 0px;
+}
+
+.productsContainer.active,
+.categoriesContainer.active {
+    overflow: auto;
+    max-height: 400px;
+}
+
+.search_container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category_info{
+    display: flex;
+    flex-direction: column;
+}
+
+.cat_prod_switch {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.switch_label {
+    background-color: #8fb17d;
+    border: 1px solid #000;
+    color: #000;
+    cursor: pointer;
+    padding: 4px 12px;
+}
+
+.switch_label.active {
+    background-color: var(--mainGreenColor);
+    color: #fff;
+}
+
+
+.switch_label>input {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+.categoriesTable {
+    border: 1px solid var(--mainGreenColor);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.categoriesTable img {
+    cursor: pointer;
+}
+
+.search_field {
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+.search_button {
+    background-color: var(--mainGreenColor);
+    color: #fff;
+    padding: 8px 12px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: '__Inter_36bd41', '__Inter_Fallback_36bd41';
+    text-decoration: none;
+}
+
+.all_orders {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 400px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.orderCard {
+    background-color: var(--mainGreenColor);
+    border-radius: 4px;
+    padding: 12px;
+    color: #fff;
+}
+
+.orderCard a {
+    display: block;
+    width: 100%;
+    background-color: var(--mainBlackColor);
+    padding: 6px 0;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+}

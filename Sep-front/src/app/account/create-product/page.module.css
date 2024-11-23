@@ -1,0 +1,4 @@
+.edit_product_page{
+    width: calc(100vw - 48px);
+    padding: 12px 24px;
+}

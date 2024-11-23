@@ -1,0 +1,31 @@
+body{
+  margin: 0;
+  background-color: #f7f7f7;
+  overflow-x: hidden;
+}
+
+/* Customize scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust width to make it thin */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #65B43A; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Optional: Rounded corners for the thumb */
+}
+
+/* Optional: Customizing the hover state of the scrollbar thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: #4d8a2f; /* Darker shade of green on hover */
+}
+
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* Makes the scrollbar thin */
+  scrollbar-color: #65B43A #f1f1f1; /* Thumb color and track color */
+}

@@ -1,0 +1,30 @@
+.login_page_container{
+    width: 100vw;
+    /* height: calc(100dvh - 105px); */
+    padding: 75px 0;
+    display: grid;
+    place-items: center;
+}
+
+.forms_container{
+    display: flex;
+    /* align-items: center; */
+}
+
+@media(max-width:1210px){
+    .forms_container{
+        width: calc(100% - 48px);
+        justify-content: center;
+    }
+
+    .left, .right{
+        width: calc(100% - 96px);
+    }
+}
+
+@media(max-width:768px){
+    .forms_container{
+        flex-direction: column;
+        gap: 24px;
+    }
+}

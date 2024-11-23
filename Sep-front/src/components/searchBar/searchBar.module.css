@@ -1,0 +1,41 @@
+.search_bar_container{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search_bar_container input{
+    border: 0;
+    height: 25px;
+    width: 250px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--mainBlackColor); /* Adds a 1px solid black border to the bottom */
+    transition: all 0.3s ease;
+    padding: 0px 8px;
+    border-radius: 0px;
+    background-color: #f7f7f7;
+
+}
+
+.search_bar_container input:focus-visible {
+    border-radius: 16px;
+    outline: none; /* Removes the default focus outline */
+    border: 1px solid var(--mainBlackColor); /* Adds a 1px solid black border to the bottom */
+}
+
+.search_icon{
+    cursor: pointer;
+}
+
+
+@media (max-width: 1024px) {
+    .search_bar_container input{
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search_bar_container, .search_bar_container input{
+        width: 100%;
+    }
+}

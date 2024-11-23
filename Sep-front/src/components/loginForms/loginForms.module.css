@@ -1,0 +1,162 @@
+.login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: calc(100% - 96px);
+  border: 1px solid var(--mainBlackColor);
+  border-right: 0;
+  width: 450px;
+  border-radius: 8px 0 0 8px;
+  padding: 48px;
+  background-color: var(--mainBlackColor);
+  color: #fff;
+}
+
+.register_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: calc(100% - 96px);
+  border: 1px solid var(--mainBlackColor);
+  border-left: 0;
+  width: 450px;
+  border-radius: 0 8px 8px 0;
+  padding: 48px;
+  background-color: var(--mainGreenColor);
+  color: var(--mainBlackColor);
+}
+
+.login_form input:-webkit-autofill,
+.login_form input:-webkit-autofill:hover,
+.login_form input:-webkit-autofill:focus,
+.login_form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: #fff; /* Set text color to white */
+  background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Ensuring styles apply to Firefox */
+.login_form input:-moz-autofill {
+  background-color: transparent;
+  -moz-box-shadow: 0 0 0px 1000px transparent inset;
+  color: #fff; /* Set text color to white */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.register_form input:-webkit-autofill,
+.register_form input:-webkit-autofill:hover,
+.register_form input:-webkit-autofill:focus,
+.register_form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: var(--mainBlackColor); /* Set text color to white */
+  background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Ensuring styles apply to Firefox */
+.register_form input:-moz-autofill {
+  background-color: transparent;
+  -moz-box-shadow: 0 0 0px 1000px transparent inset;
+  color: var(--mainBlackColor); /* Set text color to white */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.register_form input {
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  border-bottom: 1px solid var(--mainBlackColor);
+  color: var(--mainBlackColor);
+}
+
+.register_form label {
+  color: var(--mainBlackColor);
+}
+.login_form h1,
+.register_form h2 {
+  font-size: 24px;
+}
+
+.login_form input {
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.login_button {
+  border: 1px solid var(--mainBlackColor);
+  border-radius: 8px;
+  color: var(--mainBlackColor);
+  background-color: #fff;
+  padding: 8px 10px;
+  width: 80%;
+  font-size: 16px;
+  margin-top: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login_button:hover {
+  border: 1px solid #fff;
+  background-color: var(--mainBlackColor);
+  color: #fff;
+}
+
+.register_form .login_button {
+  border: 1px solid #fff;
+  background-color: var(--mainBlackColor);
+  color: #fff;
+}
+
+.register_form .login_button:hover {
+  border: 1px solid var(--mainBlackColor);
+  background-color: #fff;
+  color: var(--mainBlackColor);
+}
+
+.error_message {
+  color: #cc0000;
+}
+
+.register_form .company_details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  height: fit-content;
+  max-height: 300px;
+  transition: all 0.5s ease;
+}
+
+
+.register_form .company_details.hidden{
+    max-height: 0;
+}
+
+
+@media(max-width:1210px){
+  .login_form, .register_form{
+    width: calc(100% - 96px);
+  }
+}
+
+@media(max-width:768px){
+  .login_form, .register_form{
+    width: calc(100% - 0px);
+  }
+
+  .login_form, .register_form{
+    border-radius: 8px;
+  }
+}

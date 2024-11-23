@@ -1,0 +1,24 @@
+.delete_button, .finish_button{
+    background-color: var(--mainGreenColor);
+    color: #fff;
+    padding: 8px 12px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    filter: brightness(1);
+    transition: filter 0.3s ease;
+    font-size: 16px;
+}
+
+.delete_button:hover, .finish_button:hover{
+    filter: brightness(0.8);
+}
+
+.button_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    gap: 8px;
+}

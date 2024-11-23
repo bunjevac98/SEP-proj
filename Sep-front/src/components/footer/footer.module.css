@@ -1,0 +1,28 @@
+.page_footer{
+    width: calc(100vw - 48px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-top: 1px solid var(--mainBlackColor);
+}
+
+.page_footer .footer_left_top{
+    display: flex;
+    gap: 12px;
+}
+
+.page_footer .footer_left_top a{
+    color: var(--mainBlackColor);
+}
+
+.footer_left_side p{
+    margin-bottom: 0;
+}
+@media (max-width: 768px) {
+    .page_footer{
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+}

@@ -1,0 +1,23 @@
+.adminProductCard {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 24px);
+  gap: 14px;
+  margin: 6px 0px;
+  padding-right: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--mainGreenColor);
+}
+
+.actionsContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.actionsContainer img {
+  cursor: pointer;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
