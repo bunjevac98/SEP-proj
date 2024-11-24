@@ -28,7 +28,7 @@ const dataSchema = new Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      required: true,
+      required: false,
       default: null,
     },
     hasSizes: { type: Boolean, default: false }, // Flag to indicate if the product has sizes

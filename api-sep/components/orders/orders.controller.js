@@ -2,6 +2,7 @@ const Order = require("./models/orders.model");
 const Product = require("../products/models/product.model");
 const User = require("../user/models/user.model");
 const { shopEmailsHandler } = require("../../emailHandler/orderEmailHandler");
+const axios = require("axios");
 
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -100,7 +101,7 @@ exports.create = async (req, res) => {
 
     //Product of cart
     const productsOfOrder = await getProductsOfOrder(data);
-    console.log("---------------------------------------", productsOfOrder);
+    console.log("productsOfOrder---------------->", productsOfOrder);
     //Total price of order
     totalPrice =
       productsOfOrder && productsOfOrder.totalPrice
@@ -115,19 +116,6 @@ exports.create = async (req, res) => {
         .json({ message: "Minimalna cena za narucivanje je 2000 din." });
     }
     // Ako korisnik nije ulogovan
-    if (req.body.customer) {
-      const endOfOrder = await notLoginUser(
-        req.body.customer,
-        orderNumber,
-        productsOfOrder,
-        totalPrice,
-        req.body.description
-      );
-      if (!endOfOrder) {
-        return res.status(404).json({ message: "Doslo je do greske" });
-      }
-      return res.status(201).json({ message: "Uspesno smo kreirali posiljku" });
-    }
 
     //Ovde treba da se hendluje adresa korisnika
     const user = await User.findById(req.body.customer_id);
@@ -140,7 +128,7 @@ exports.create = async (req, res) => {
     orderObj.orderNumber = orderNumber;
     orderObj.address = address_for_order;
     orderObj.totalPrice = totalPrice;
-    orderObj.status = "Ordered";
+    orderObj.status = "In Progress";
     orderObj.orderedProducts = productsOfOrder.products;
     orderObj.description = req.body.description || "";
 
@@ -150,31 +138,37 @@ exports.create = async (req, res) => {
     const order = new Order(orderObj);
     await order.save();
 
-    console.log("buyer.email-->", buyer.email);
-    //ovo ce biti u else
-    await shopEmailsHandler(
-      order.orderedProducts,
-      buyer,
-      orderNumber,
-      address_for_order,
-      buyer.email, //Ovde
-      order.description || "--",
-      "bought"
-    );
+    //TODO: OVO TREBA DA SE POZOVE FUNKCIJA KOJA CE SE POZVEZATI SA PSP i salje odredjene informacije
+    console.log("Stigli smo do order od WEBSHOPA");
+    const requestBody = {
+      MERCHANT_ID: process.env.MERCHANT_ID,
+      MERCHANT_PASSWORD: process.env.MERCHANT_PASSWORD,
+      AMOUNT: parseInt(order.totalPrice),
+      MERCAHNT_ORDER_ID: orderNumber,
+      MERCHANT_TIMESTAMP: new Date().toISOString(),
+      PAYMENT_METHOD: "bank",
+      //Ovo se postavlja kod PSP-a
+      // SUCCESS_URL: successUrl,
+      // FAILED_URL: failedUrl,
+      // ERROR_URL: errorUrl,
+    };
 
-    await shopEmailsHandler(
-      order.orderedProducts,
-      buyer,
-      orderNumber,
-      address_for_order,
-      "stopak.ambalaza@gmail.com",
-      order.description || "--",
-      "sold"
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:3339/create-transaction", // Dodaj http://
+        requestBody
+      );
+
+      console.log("Zavrsili smo order od WEBSHOPA", response.data);
+
+      return response.data; // Sadrži PAYMENT_URL i PAYMENT_ID
+    } catch (error) {
+      throw new Error(`Failed to send request to PSP: ${error.message}`);
+    }
 
     return res.status(201).json({ order });
   } catch (error) {
-    console.log("CATCHERR", error);
+    console.log("Create Error:", error);
     return res.status(500).json({ message: error.message });
   }
 };

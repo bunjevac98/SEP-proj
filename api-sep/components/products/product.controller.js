@@ -50,44 +50,44 @@ exports.create = async (req, res) => {
     let data = req.body;
     console.log("data", data);
     // console.log("files", req.files);
-    if (!req.files) {
-      return res
-        .status(404)
-        .json({ message: "Morate staviti sliku za proizvod" });
-    }
+    // if (!req.files) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: "Morate staviti sliku za proizvod" });
+    // }
 
-    const fileEntries = Object.entries(req.files);
+    // const fileEntries = Object.entries(req.files);
 
-    let images = [];
+    // let images = [];
 
-    let i = 0;
-    for (const [key, file] of fileEntries) {
-      const filesToUpload = Array.isArray(file) ? file : [file];
-      for (const fileToUpload of filesToUpload) {
-        let imageResponse; // Deklaracija izvan try bloka
-        try {
-          const imageUrl = await uploadToS3(fileToUpload); // Upload fajla na S3
+    // let i = 0;
+    // for (const [key, file] of fileEntries) {
+    //   const filesToUpload = Array.isArray(file) ? file : [file];
+    //   for (const fileToUpload of filesToUpload) {
+    //     let imageResponse; // Deklaracija izvan try bloka
+    //     try {
+    //       const imageUrl = await uploadToS3(fileToUpload); // Upload fajla na S3
 
-          imageResponse = await new Image({
-            type: req.headers.type,
-            localPath: imageUrl.key, // S3 URL
-            url: imageUrl.Location,
-            type: "listing",
-            originalname: imageUrl.key,
-          }).save();
-        } catch (error) {
-          console.log(error);
-          return res.status(500).json({
-            message: "Došlo je do greške prilikom uploadovanja slike.",
-          });
-        }
+    //       imageResponse = await new Image({
+    //         type: req.headers.type,
+    //         localPath: imageUrl.key, // S3 URL
+    //         url: imageUrl.Location,
+    //         type: "listing",
+    //         originalname: imageUrl.key,
+    //       }).save();
+    //     } catch (error) {
+    //       console.log(error);
+    //       return res.status(500).json({
+    //         message: "Došlo je do greške prilikom uploadovanja slike.",
+    //       });
+    //     }
 
-        if (imageResponse) {
-          images.push(imageResponse._id); // Dodaj samo ako je imageResponse definisan
-        }
-        i++;
-      }
-    }
+    //     if (imageResponse) {
+    //       images.push(imageResponse._id); // Dodaj samo ako je imageResponse definisan
+    //     }
+    //     i++;
+    //   }
+    // }
 
     const productsArr = await Product.find();
 
@@ -127,14 +127,14 @@ exports.create = async (req, res) => {
       numOfArticle = num.toString().padStart(originalStr.length, "0");
     }
 
-    let featureimage = JSON.parse(JSON.stringify(images[0]));
-    let allimages = JSON.parse(JSON.stringify(images));
+    // let featureimage = JSON.parse(JSON.stringify(images[0]));
+    // let allimages = JSON.parse(JSON.stringify(images));
 
-    allimages.shift();
+    // allimages.shift();
 
-    data.featureImage = featureimage;
+    // data.featureImage = featureimage;
 
-    data.images = allimages;
+    // data.images = allimages;
 
     data.url = uniqueUrl;
 
@@ -156,10 +156,9 @@ exports.create = async (req, res) => {
     if (data.format === "prodaja") {
       data.price = data.price;
     }
-
-    if (!data.category) {
-      return res.status(400).json({ message: "Niste uneli kategoriju" });
-    }
+    // if (!data.category) {
+    //   return res.status(400).json({ message: "Niste uneli kategoriju" });
+    // }
 
     const item = await new Product({ ...data }).save();
 

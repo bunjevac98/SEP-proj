@@ -31,8 +31,6 @@ const routes = {
   users: require("./components/user/user.routes"),
   auth: require("./components/auth/auth.routes"),
   category: require("./components/categories/categories.routes"),
-  // //uploadLocal: require('./components/upload-local/upload-local.routes'),
-  // images: require('./components/images/image.routes'),
   products: require("./components/products/product.routes"),
   orders: require("./components/orders/orders.routes"),
 };
@@ -40,8 +38,6 @@ const routes = {
 routes.auth(app);
 routes.users(app);
 routes.category(app);
-// routes.uploadLocal(app);
-// routes.images(app)
 routes.products(app);
 routes.orders(app);
 

@@ -2,9 +2,8 @@ const controller = require("./product.controller");
 const jwt = require("../../middleware/jwt");
 const { checkRole } = require("../../middleware/products/createMiddleware");
 module.exports = (app) => {
-  app
-    .route("/create-product")
-    .post(jwt.checkToken, checkRole("admin"), controller.create);
+  // jwt.checkToken, checkRole("admin"),
+  app.route("/create-product").post(controller.create);
 
   app.route("/get-all-product").get(controller.getAllProducts);
 
