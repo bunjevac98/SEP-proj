@@ -148,14 +148,14 @@ exports.create = async (req, res) => {
       MERCHANT_TIMESTAMP: new Date().toISOString(),
       PAYMENT_METHOD: "bank",
       //Ovo se postavlja kod PSP-a
-      // SUCCESS_URL: successUrl,
-      // FAILED_URL: failedUrl,
-      // ERROR_URL: errorUrl,
+      SUCCESS_URL: "successUrl",
+      FAILED_URL: "failedUrl",
+      ERROR_URL: "errorUrl",
     };
 
     try {
       const response = await axios.post(
-        "http://localhost:3339/create-transaction", // Dodaj http://
+        "http://localhost:3339/initiate-transaction", // Dodaj http://
         requestBody
       );
 
