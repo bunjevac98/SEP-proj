@@ -1,7 +1,9 @@
 const controller = require("./transaction.controller");
 
 module.exports = (app) => {
+  app.route("/initiate-transaction").post(controller.initiateTransaction);
 
-    app.route("/create-transaction").post(controller.createTransaction);
-
+  app
+    .route("/update-transaction-payment-method")
+    .post(controller.updateTransaction);
 };

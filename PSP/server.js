@@ -28,7 +28,7 @@ app.use(cookieParser());
 const routes = {
   merchant: require("./components/merchant/merchant.routes"),
   transaction: require("./components/transaction/transaction.routes"),
-  payment: require("./components/payment/payment.routes"),
+  // payment: require("./components/payment/payment.routes"),
 };
 
 routes.merchant(app);

@@ -1,5 +1,6 @@
 const Merchant = require("./models/merchant.models");
 
+//TODO:Kada merchant hoce da stavi novu mogucnost u sistemu, dodati SAMO PAYMENT METHOD U TO I CRUD ZA FUNKCIONISANJE TOGA
 exports.create = async (req, res) => {
   try {
     const {
