@@ -8,7 +8,6 @@ const corsOptions = {
       callback(null, true);
     } else {
       // callback(null, true);
-      console.log("dsasdaasdasdasdasd");
       callback(new Error("Not allowed by CORS"));
     }
   },

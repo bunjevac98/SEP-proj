@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-    merchantId: { type: String, required: true }, // ID prodavca
-    merchantOrderId: { type: String, required: true, unique: true }, // Jedinstveni ID transakcije
-    amount: { type: Number, required: true }, // Iznos transakcije
-    currency: { type: String, required: true, default: 'USD' }, // Valuta
-    status: { type: String, enum: ['PENDING', 'SUCCESS', 'FAILED'], default: 'PENDING' }, // Status transakcije
-    paymentMethod: { type: String, required: true }, // Metoda plaćanja
-    timestamp: { type: Date, default: Date.now }, // Vreme transakcije
-    response: { type: Object, default: null }, // Odgovor od banke/PSP-a
-});
+    merchantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Merchant', required: true },
+    orderId: { type: String, required: true },
+    amount: { type: Number, required: true },
+    paymentMethod: { type: String, required: true }, // e.g., 'PayPal', 'Crypto', 'Bank'
+    transactionStatus: { type: String, default: 'pending' }, // 'pending', 'approved', 'failed'
+    paymentUrl: { type: String }, // URL for completing the payment
+    responseCode: { type: String }, // Response from the payment gateway (e.g., 200, 400)
+    successUrl: { type: String }, // URL to redirect user if payment is successful
+    failedUrl: { type: String }, // URL to redirect user if payment fails
+    errorUrl: { type: String }, // URL to redirect if error occurs
+  });
 
 module.exports = mongoose.model('Transaction', transactionSchema);

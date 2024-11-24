@@ -27,12 +27,12 @@ app.use(cookieParser());
 // **** Routes ****
 const routes = {
   merchant: require("./components/merchant/merchant.routes"),
-  // transaction: require("./components/transaction/transaction.routes"),
-  // payment: require("./components/payment/payment.routes"),
+  transaction: require("./components/transaction/transaction.routes"),
+  payment: require("./components/payment/payment.routes"),
 };
 
 routes.merchant(app);
-//   routes.transaction(app);
+routes.transaction(app);
 //   routes.payment(app);
 
 app.get("/", (req, res) => {
