@@ -16,6 +16,7 @@ const transactionSchema = new mongoose.Schema({
   }, // e.g., 'PayPal', 'Crypto', 'Bank'
   transactionStatus: { type: String, default: "pending" }, // 'pending', 'approved', 'failed'
   paymentUrl: { type: String }, // URL for completing the payment
+  paymentId: { type: String }, // URL for completing the payment
   responseCode: { type: String }, // Response from the payment gateway (e.g., 200, 400)
   successUrl: { type: String }, // URL to redirect user if payment is successful
   failedUrl: { type: String }, // URL to redirect user if payment fails

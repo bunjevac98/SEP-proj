@@ -16,17 +16,15 @@ const bankService = {
       };
 
       // URL bankinog API-ja
-      const bankApiUrl = "https://locallhost:3338/bank-api";
+      const bankApiUrl = "http://localhost:3338/create-payment-url";
 
       // Slanje zahteva banci
       const response = await axios.post(bankApiUrl, payload);
 
+      console.log("response", response.data);
       // Provera odgovora i vraćanje rezultata
       if (response.status === 200 && response.data) {
-        return {
-          paymentId: response.data.PAYMENT_ID, // Ekstrahovan PAYMENT_ID
-          paymentUrl: response.data.PAYMENT_URL, // Ekstrahovan PAYMENT_URL
-        };
+        return response.data;
       } else {
         throw new Error("Invalid response from bank");
       }
@@ -37,4 +35,4 @@ const bankService = {
   },
 };
 
-module.exports = bankService;
+module.exports = { bankService };

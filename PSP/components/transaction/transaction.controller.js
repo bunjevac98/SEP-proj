@@ -1,5 +1,6 @@
 const Transaction = require("./models/transaction.models");
 const Merchant = require("../merchant/models/merchant.models");
+const { bankService } = require("../../services/bankService");
 const axios = require("axios");
 
 module.exports.initiateTransaction = async (req, res) => {
@@ -66,10 +67,11 @@ module.exports.initiateTransaction = async (req, res) => {
 module.exports.updateTransaction = async (req, res) => {
   try {
     const transactionId = req.params.id;
-    const { selectedPaymentMethod } = req.body;
+    const { paymentMethod } = req.body;
 
     // Proveri da li postoji transakcija
     const transaction = await Transaction.findById(transactionId);
+
     if (!transaction) {
       return res.status(404).json({ message: "Transaction not found" });
     }
@@ -80,15 +82,15 @@ module.exports.updateTransaction = async (req, res) => {
       return res.status(404).json({ message: "Merchant not found" });
     }
 
-    if (!merchant.allowedPaymentMethods.includes(selectedPaymentMethod)) {
+    if (!merchant.allowedPaymentMethods.includes(paymentMethod)) {
       return res.status(400).json({ message: "Payment method not allowed" });
     }
-
+    console.log(merchant);
     // Ažuriraj paymentMethod, paymentId i paymentUrl u transakciji
-    if (selectedPaymentMethod === "Banka") {
+    if (paymentMethod === "Bank") {
       const bankRequestData = {
-        merchantId: merchant.bankMerchantId, // ID za banku (čuvaš ga za svakog merchant-a)
-        merchantPassword: merchant.bankMerchantPassword, // API ključ ili lozinka
+        merchantId: merchant.merchantId, // ID za banku (čuvaš ga za svakog merchant-a)
+        merchantPassword: merchant.merchantPassword, // API ključ ili lozinka
         amount: transaction.amount,
         merchantOrderId: transaction.orderId,
         timestamp: new Date().toISOString(),
@@ -101,20 +103,23 @@ module.exports.updateTransaction = async (req, res) => {
       const bankResponse = await bankService.initiateTransaction(
         bankRequestData
       );
-
+      console.log("bankResponse");
       // Preuzmi PAYMENT_ID i PAYMENT_URL iz odgovora banke
       const paymentId = bankResponse.paymentId;
       const paymentUrl = bankResponse.paymentUrl;
 
+      //TODO: hendlovati gresku ako nema paymentURL verovatno baciti error url
+
       // Ažuriraj transakciju sa novim podacima
-      transaction.paymentMethod = selectedPaymentMethod;
+      transaction.paymentMethod = paymentMethod;
       transaction.paymentId = paymentId;
       transaction.paymentUrl = paymentUrl;
 
+      console.log("transac21323tion", transaction);
       await transaction.save();
 
       // Redirektuj korisnika na banku
-      return res.status(302).redirect(paymentUrl);
+      return res.status(302).redirect(`${paymentUrl}/${paymentId}`);
     }
 
     // Ako metoda plaćanja nije banka

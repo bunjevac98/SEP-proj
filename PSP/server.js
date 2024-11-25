@@ -3,7 +3,6 @@ const dotenv = require("dotenv");
 const net = require("net");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const { server_start } = require("./utils/colorText");
 const corsOptions = require("./config/corsOptions");
