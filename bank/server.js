@@ -26,8 +26,12 @@ app.use(cookieParser());
 
 // **** Routes ****
 const routes = {
-  
-}
+  merchant: require("./components/bankMerchants/bankMerchant.routes"),
+  transaction: require("./components/bankTransactions/bankTransactions.routes"),
+};
+
+routes.merchant(app);
+routes.transaction(app);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
