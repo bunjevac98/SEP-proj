@@ -103,12 +103,16 @@ module.exports.updateTransaction = async (req, res) => {
       const bankResponse = await bankService.initiateTransaction(
         bankRequestData
       );
+
       console.log("bankResponse");
       // Preuzmi PAYMENT_ID i PAYMENT_URL iz odgovora banke
       const paymentId = bankResponse.paymentId;
       const paymentUrl = bankResponse.paymentUrl;
 
-      //TODO: hendlovati gresku ako nema paymentURL verovatno baciti error url
+      //TODO: hendlovati gresku ako nema paymentURL verovatno baciti error url i redirektovati usera tamo
+      if (paymentId == null || paymentUrl == null) {
+        return res.status(400).json({ message: "Payment URL not found" });
+      }
 
       // Ažuriraj transakciju sa novim podacima
       transaction.paymentMethod = paymentMethod;
