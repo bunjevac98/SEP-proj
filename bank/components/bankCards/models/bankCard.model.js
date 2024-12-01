@@ -21,11 +21,11 @@ const bankCardSchema = new mongoose.Schema({
   },
   bankCardHolderName: {
     type: String,
-    required: true,
+    required: false,
   },
   bankIssuer: {
     type: String, // Ime banke koja je izdala karticu
-    required: true,
+    required: false,
   },
 });
 

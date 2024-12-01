@@ -7,12 +7,12 @@ module.exports.createPaymentUrl = async (req, res) => {
     const body = req.body;
 
     const { merchant, vlidation } = await validateBody(body);
-    console.log(vlidation);
+    console.log("vlidation:", vlidation);
     if (!vlidation) {
       return res.status(400).json({ message: "Bad request" });
     }
-
-    const paymentUrl = "OVO TREBA DODATI";
+    //TODO: DODATI PRAVI PAYMENT URL KADA BUDFEM POVEZIVAO SA BANKOM
+    const paymentUrl = "OVO TREBA DODATI"; // const paymentUrl = await generatePaymentUrl(merchant._id, paymentId);
     const paymentId = generatePaymentId();
 
     const bankTransaction = new BankTransaction({
@@ -81,4 +81,8 @@ const generatePaymentId = () => {
 
   // Combine both parts
   return `PAY-${timestampPart}-${randomPart}`;
+};
+const generatePaymentUrl = async (merchantId, paymentId) => {
+  // Replace this with the actual logic to generate the payment URL
+  return `https://example.com/payment?merchantId=${merchantId}&paymentId=${paymentId}`;
 };
