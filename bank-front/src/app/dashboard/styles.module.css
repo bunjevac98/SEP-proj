@@ -1,0 +1,56 @@
+.container {
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container h1 {
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.cards_container {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.left_container,
+.right_container {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.left_container h2,
+.right_container h2 {
+    margin-bottom: 8px;
+}
+
+.left_container>div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.left_container>div>img {
+    cursor: pointer;
+}
+
+
+.left_container p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

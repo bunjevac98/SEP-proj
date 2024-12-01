@@ -1,0 +1,124 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100dvh;
+    overflow-y: auto;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.transactionDetails {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.successContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.successContainer > .button{
+    width: fit-content;
+    text-decoration: none;
+}
+
+.transactionDetails>h2 {
+    font-size: 16px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.cardPreview {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 350px;
+    height: 180px;
+    background-color: #000;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardNumber {
+    font-size: 1.5em;
+    letter-spacing: 2px;
+}
+
+.cardDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardHolder {
+    font-size: 1em;
+}
+
+.expiryDate {
+    font-size: 1em;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.button {
+    padding: 10px;
+    background-color: #000;
+    border: 1px solid #ffffff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #fefefe;
+    border: 1px solid #000;
+    color: #000;
+}
