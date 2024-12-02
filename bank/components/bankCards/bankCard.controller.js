@@ -35,7 +35,7 @@ module.exports.paymentProcess = async (req, res) => {
     // Ažuriraj status transakcije
     const transactionResult = await updateTransactionStatus(
       paymentId,
-      "success"
+      "completed"
     );
     if (!transactionResult.success) {
       throw new Error(transactionResult.message);
@@ -89,10 +89,14 @@ async function updateBuyerBalance(bankPan, bankCvv, bankExpiryDate, amount) {
 async function updateTransactionStatus(paymentId, status) {
   const transaction = await BankTransaction.findOne({
     bankPaymentId: paymentId,
+    bankStatus: "pending",
   });
-  console.log(transaction);
+
   if (!transaction) {
-    return { success: false, message: "Transaction not found" };
+    return {
+      success: false,
+      message: "Transaction not found or already proceded",
+    };
   }
   transaction.bankStatus = status;
   await transaction.save();
@@ -103,8 +107,17 @@ async function updateMerchnatBalance(merchantId, amount) {
   if (!merchant) {
     return { success: false, message: "Merchant not found" };
   }
-  merchant.bankBalance += amount;
-  await merchant.save();
+
+  console.log("merchant.merchantCard--------->", merchant.merchantCard);
+
+  const bankCard = await BankCard.findById(merchant.merchantCard);
+  if (!bankCard) {
+    return { success: false, message: "Merchant does not have a bank card" };
+  }
+
+  bankCard.bankBalance += amount;
+
+  await bankCard.save();
   return { success: true };
 }
 

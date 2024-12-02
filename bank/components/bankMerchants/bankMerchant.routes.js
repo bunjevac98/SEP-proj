@@ -2,5 +2,6 @@ const controller = require("../bankMerchants/bankMerchant.controller"); // Impor
 
 module.exports = (app) => {
   app.route("/create-merchant").post(controller.create);
+  
   // app.route("/get-all-available-payment-methods").get(controller.getAll);
 };

@@ -6,6 +6,4 @@ module.exports = (app) => {
   app.route("/get-bank-card/:id").get(controller.getBankCardById);
 
   app.route("/create-bank-card").post(controller.createBankCard);
-//   app.route("/update-bank-card/:id").put(controller.updateBankCard);
-//   app.route("/delete-bank-card/:id").delete(controller.deleteBankCard);
 };
