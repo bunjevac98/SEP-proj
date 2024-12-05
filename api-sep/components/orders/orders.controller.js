@@ -138,7 +138,6 @@ exports.create = async (req, res) => {
     const order = new Order(orderObj);
     await order.save();
 
-    //TODO: OVO TREBA DA SE POZOVE FUNKCIJA KOJA CE SE POZVEZATI SA PSP i salje odredjene informacije
     console.log("Stigli smo do order od WEBSHOPA");
     const requestBody = {
       MERCHANT_ID: process.env.MERCHANT_ID,
@@ -152,21 +151,9 @@ exports.create = async (req, res) => {
       FAILED_URL: "failedUrl",
       ERROR_URL: "errorUrl",
     };
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3339/initiate-transaction", // Dodaj http://
-        requestBody
-      );
-
-      console.log("Zavrsili smo order od WEBSHOPA", response.data);
-
-      return response.data; // Sadrži PAYMENT_URL i PAYMENT_ID
-    } catch (error) {
-      throw new Error(`Failed to send request to PSP: ${error.message}`);
-    }
-
-    return res.status(201).json({ order });
+    const query = new URLSearchParams(requestBody).toString();
+    
+    return res.redirect(`http://localhost:3339/initiate-transaction?${query}`);
   } catch (error) {
     console.log("Create Error:", error);
     return res.status(500).json({ message: error.message });

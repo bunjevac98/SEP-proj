@@ -27,12 +27,12 @@ app.use(cookieParser());
 const routes = {
   merchant: require("./components/merchant/merchant.routes"),
   transaction: require("./components/transaction/transaction.routes"),
-  // payment: require("./components/payment/payment.routes"),
+  payment: require("./components/payment/payment.routes"),
 };
 
 routes.merchant(app);
 routes.transaction(app);
-//   routes.payment(app);
+routes.payment(app);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
